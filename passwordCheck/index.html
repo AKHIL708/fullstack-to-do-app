@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Password Strength Indicator Lab</title>
+		<style>
+			/* Add your CSS here */
+		</style>
+	</head>
+	<body>
+		<h1>Password Strength Indicator Lab</h1>
+		<label for="password">Enter a password:</label>
+		<input type="password" id="password" />
+		<p id="strength">
+		  Password Strength: <span id="strengthIndicator">Very Weak</span>
+		</p>
+		<script>
+			  let inputVal = document.getElementById("password");
+    let weakPasswordRegex = /^[a-z0-9]{4,7}$/;
+    let normalPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,11}$/;
+    let strongPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,15}$/;
+
+    function checkPassword() {
+      let inputValueTackler = inputVal.value;
+      if (inputValueTackler.length < 4) {
+        document.getElementById("strengthIndicator").innerText = "Very Weak";
+      } else if (weakPasswordRegex.test(inputValueTackler)) {
+        document.getElementById("strengthIndicator").innerText = "Weak";
+      } else if (normalPasswordRegex.test(inputValueTackler) || (inputValueTackler.length >= 8 && inputValueTackler.length <=11) ) {
+        document.getElementById("strengthIndicator").innerText = "Medium";
+      } else if (strongPasswordRegex.test(inputValueTackler) ) {
+        document.getElementById("strengthIndicator").innerText = "Strong";
+      }   else if(inputValueTackler.length >= 12 && inputValueTackler.length <= 15){
+            document.getElementById("strengthIndicator").innerText = "Strong";
+        }else if (
+        strongPasswordRegex.test(inputValueTackler) ||
+        inputValueTackler.length > 15
+      ) {
+        document.getElementById("strengthIndicator").innerText = "Very Strong";
+      } 
+    }
+    inputVal.addEventListener("input", checkPassword);
+		</script>
+	</body>
+</html>
